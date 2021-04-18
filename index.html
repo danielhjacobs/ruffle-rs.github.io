@@ -35,19 +35,20 @@ title: Ruffle
 			</p>
 
 			<ul>
-				<li><a href="#what-is-ruffle">read more</a></li>
-				<li><a href="https://ruffle.rs/demo" target="_blank">demo</a></li>
-				<li><a href="https://discord.gg/J8hgCQN" target="_blank">discord</a></li>
+				<li><a href="#what-is-ruffle">Read more</a></li>
+				<li style="visibility: hidden;">Demo</li>
+				<li style="position: absolute;"><a href="https://ruffle.rs/demo/">Demo</a></li>
+				<li><a href="https://discord.gg/ruffle" target="_blank">Discord</a></li>
 			</ul>
 			<a class="header-down-arrow" href="#what-is-ruffle">
-				<img src="{{ "/assets/downarrow.png" | relative_url }}" alt="" loading="lazy">
+				<img src="{{ "/assets/downarrow.png" | relative_url }}" alt="Read more" loading="lazy">
 			</a>
 		</section>
 		<section class="section content">
 			<h2 id="what-is-ruffle">What is ruffle</h2>
 			<div class="row">
 				<div class="col-base col-lg col-lg-auto col-img">
-					<img src="{{ "/assets/logo.png" | relative_url }}" class="img-fluid my-3 mx-auto">
+					<img src="{{ "/assets/logo.png" | relative_url }}" alt="Ruffle" class="img-fluid my-3 mx-auto">
 				</div>
 				<div class="col-base col-lg">
 					<p>
@@ -95,12 +96,12 @@ title: Ruffle
 			<h2 id="usage">Usage</h2>
 			<div class="row">
 				<div class="col-base col-sm col-sm-3">
-					<img src="{{ "/assets/undraw_design_components.svg" | relative_url }}" class="img-fluid">
+					<img src="{{ "/assets/undraw_design_components.svg" | relative_url }}" alt="Usage" class="img-fluid">
 				</div>
 				<div class="col-base col-lg col-lg-9">
 					<h3>Installing on a website you own</h3>
 					<p>
-						Download the 'standalone' version of Ruffle from <a href="#releases">our releases</a>,
+						Download the 'standalone' version of Ruffle from <a href="#downloads">our downloads</a>,
 						and include the following JavaScript on any page with Flash content:
 						{% capture javascript_installation %}<script src="path/to/ruffle/ruffle.js"></script>{% endcapture %}
 						<pre>{{ javascript_installation |  xml_escape }}</pre>
@@ -124,7 +125,7 @@ title: Ruffle
 				</div>
 			</div>
 			<div class="row mt-2">
-				<div class="col-base col-lg col-lg-6">
+				<div class="col-base col-lg col-lg-8">
 					<h3>Installing the browser extension</h3>
 					<p>
 						If you visit websites that have Flash content but aren't using Ruffle, or you want to ensure
@@ -132,9 +133,9 @@ title: Ruffle
 						extension is the perfect thing for you!
 					</p>
 					<p>
-						Until our first release, we currently only ship unsigned browser extensions.
+						Until our first release, we currently only ship a signed browser extension for Firefox. The other extensions are unsigned.
 						To use these, first download the appropriate one for your browser from
-						<a href="#releases">our releases</a>, and then install it manually.
+						<a href="#downloads">our downloads</a>, and then install it manually.
 					</p>
 					<div class="row mt-2">
 						<div class="col-base col-lg col-lg-6">
@@ -147,21 +148,28 @@ title: Ruffle
     						<li>Click Load unpacked.</li>
     						<li>Select the folder you extracted the extension to.</li>
 						</ul>
-					</div>
-					<div class="col-base col-lg col-lg-6">
 						<h4>Firefox</h4>
 						<ul>
-						<li>Right-click the Firefox .xpi download link.</li>
-						<li>Click "Save Link As..."</li>
-    						<li>Navigate to <code>about:debugging</code>.</li>
-    						<li>Click on This Firefox.</li>
-    						<li>Click Load Temporary Add-on...</li>
-    						<li>Select the .xpi that you downloaded.</li>
+						<li>Click the Firefox extension download link.</li>
+						<li>The browser will prompt you to install the extension.</li>
 						</ul>
+					</div>
+					<div class="col-base col-lg col-lg-6">
+						<h4>Safari</h4>
+						<ul>
+						<li>Click the "Chrome / Edge / Safari" link.</li>
+						<li>Extract the downloaded zip file somewhere.</li>
+						<li>Run <code>xcrun safari-web-extension-converter path/to/unzipped_folder/</code></li>
+						<li>Click "Run on Xcode".</li>
+						<li>Enable <code>Safari > Preferences > Advanced > Show Develop menu in menu bar</code>.</li>
+						<li>Enable <code>Develop > Allow Unsigned Extensions</code>.</li>
+						<li>Enable the extension by checking the box in <code>Safari > Preferences > Extensions</code>.</li>
+						</ul>
+						<div style="font-weight: bold;">Note: Converting the extension to be Safari compatible requires Xcode 12+ to be installed. For using the extension Safari 14+ is required</div>
 					</div>
 					</div>
 				</div>
-				<div class="col-base col-lg col-lg-6">
+				<div class="col-base col-lg col-lg-4">
 					<h3>Using the desktop application</h3>
 					<p>
 						If you want to run Flash content on your computer without a browser in-between, we have native
@@ -171,7 +179,7 @@ title: Ruffle
 					<p>
 						Currently most options are accessed via the command line, but we intend to develop a GUI soon
 						for ease of use. First, download the appropriate executable for your operating system from
-						<a href="#releases">our releases</a>.
+						<a href="#downloads">our downloads</a>.
 					</p>
 					<p>
 						To use Ruffle, simply double-click the executable and select the SWF file you wish to play.
@@ -185,10 +193,11 @@ title: Ruffle
 			</div>
 		</section>
 		<section class="section content">
-			<h2 id="releases">Releases</h2>
+			<div id="releases"></div>
+			<h2 id="downloads">Downloads</h2>
 			<div class="row">
 				<div class="col-base col-sm col-sm-2">
-					<img src="{{ "/assets/undraw_relaunch_day.svg" | relative_url }}" class="img-fluid">
+					<img src="{{ "/assets/undraw_relaunch_day.svg" | relative_url }}" alt="Releases" class="img-fluid">
 				</div>
 				<div class="col-base col-lg col-lg-10">
 					{% assign all_releases = site.github.releases | where_exp:"item", "item.draft == false" %}
@@ -364,7 +373,7 @@ title: Ruffle
 			<h2 id="compatibility">Compatibility</h2>
 			<div class="row">
 				<div class="col-base col-sm col-sm-3">
-					<img src="{{ "/assets/undraw_progressive_app.svg" | relative_url }}" class="img-fluid">
+					<img src="{{ "/assets/undraw_progressive_app.svg" | relative_url }}" alt="Compatibility" class="img-fluid">
 				</div>
 
 				<div class="col-base col-lg">
@@ -395,16 +404,16 @@ title: Ruffle
 						</a>
 					</p>
 					<p>
-					<h5>ActionScript 1 &amp; 2 Language <code>70%</code></h5>
-					<div class="meter" title="70%">
-						<span style="width:70%;"><span class="progress"></span></span>
+					<h5>ActionScript 1 &amp; 2 Language <code>85%</code></h5>
+					<div class="meter" title="85%">
+						<span style="width:85%;"><span class="progress"></span></span>
 					</div>
 					</p>
 
 					<p>
-					<h5>ActionScript 1 &amp; 2 API <code>35%</code></h5>
-					<div class="meter" title="35%">
-						<span style="width:35%;"><span class="progress"></span></span>
+					<h5>ActionScript 1 &amp; 2 API <code>50%</code></h5>
+					<div class="meter" title="50%">
+						<span style="width:50%;"><span class="progress"></span></span>
 					</div>
 					</p>
 				</div>
@@ -432,16 +441,16 @@ title: Ruffle
 					</p>
 
 					<p>
-					<h5>ActionScript 3 Language <code>5%</code></h5>
-					<div class="meter" title="5%">
-						<span style="width:5%;"><span class="progress"></span></span>
+					<h5>ActionScript 3 Language <code>10%</code></h5>
+					<div class="meter" title="10%">
+						<span style="width:10%;"><span class="progress"></span></span>
 					</div>
 					</p>
 
 					<p>
-					<h5>ActionScript 3 API <code>1%</code></h5>
-					<div class="meter" title="1%">
-						<span style="width:1%;"><span class="progress"></span></span>
+					<h5>ActionScript 3 API <code>5%</code></h5>
+					<div class="meter" title="5%">
+						<span style="width:5%;"><span class="progress"></span></span>
 					</div>
 					</p>
 				</div>
@@ -451,7 +460,7 @@ title: Ruffle
 			<h2 id="get-involved">Get involved</h2>
 			<div class="row">
 				<div class="col-base col-sm col-sm-2">
-					<img src="{{ "/assets/undraw_launch_day.svg" | relative_url }}" class="img-fluid">
+					<img src="{{ "/assets/undraw_launch_day.svg" | relative_url }}" alt="Get Involved" class="img-fluid">
 				</div>
 				<div class="col-base col-lg">
 					<h3>♥️ How to help the project</h3>
@@ -475,7 +484,7 @@ title: Ruffle
 						<a href="https://github.com/ruffle-rs/ruffle/issues" target="_blank">search for some issues to
 							tackle</a>,
 						and
-						<a href="https://discord.gg/J8hgCQN" target="_blank">join our Discord</a> to ask questions!
+						<a href="https://discord.gg/ruffle" target="_blank">join our Discord</a> to ask questions!
 					</p>
 				</div>
 			</div>
@@ -490,7 +499,7 @@ title: Ruffle
 						please report those to
 						<a href="https://github.com/ruffle-rs/ruffle/issues" target="_blank">our bug tracker</a>.
 						If it runs flawlessly, come
-						<a href="https://discord.gg/J8hgCQN" target="_blank">share the good news on our Discord</a>!
+						<a href="https://discord.gg/ruffle" target="_blank">share the good news on our Discord</a>!
 					</p>
 				</div>
 				<div class="col-base col-lg">
@@ -531,37 +540,57 @@ title: Ruffle
 					<ul class="sponsors">
 						<li>
 							<a href="https://www.newgrounds.com/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/newgrounds.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/newgrounds.png" | relative_url }}" alt="Newgrounds.com" class="img-fluid">
 							</a>
 						</li>
 						<li>
 							<a href="https://www.cpmstar.com/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/cpmstar.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/cpmstar.png" | relative_url }}" alt="CPMStar" class="img-fluid">
 							</a>
 						</li>
 						<li>
 							<a href="https://deepnight.net/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/deepnight.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/deepnight.png" | relative_url }}" alt="Sébastien Bénard" class="img-fluid">
 							</a>
 						</li>
 						<li>
 							<a href="https://www.crazygames.com/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/crazygames.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/crazygames.png" | relative_url }}" alt="Crazy Games" class="img-fluid">
 							</a>
 						</li>
 						<li>
 							<a href="https://www.coolmathgames.com/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/coolmathgames.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/coolmathgames.png" | relative_url }}" alt="Cool Math Games" class="img-fluid">
 							</a>
 						</li>
 						<li>
 							<a href="https://www.nytimes.com/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/nyt.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/nyt.png" | relative_url }}" alt="The New York Times" class="img-fluid">
 							</a>
 						</li>
 						<li>
 							<a href="https://www.armorgames.com/" target="_blank" rel="nofollow">
-								<img src="{{ "/assets/sponsors/armorgames.png" | relative_url }}" class="img-fluid">
+								<img src="{{ "/assets/sponsors/armorgames.png" | relative_url }}" alt="Armor Games" class="img-fluid">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.ondaeduca.com/" target="_blank" rel="nofollow">
+								<img src="{{ "/assets/sponsors/ondaeduca.png" | relative_url }}" alt="Onda Educa" class="img-fluid">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.twoplayergames.org/" target="_blank" rel="nofollow">
+								<img src="{{ "/assets/sponsors/twoplayergames.png" | relative_url }}" alt="TwoPlayerGames.org" class="img-fluid">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.wowgame.jp/" target="_blank" rel="nofollow">
+								<img src="{{ "/assets/sponsors/wowgame.png" | relative_url }}" alt="wowgame.jp" class="img-fluid">
+							</a>
+						</li>
+						<li>
+							<a href="http://kupogames.com/" target="_blank" rel="nofollow">
+								<img src="{{ "/assets/sponsors/mattroszak.png" | relative_url }}" alt="Matt Roszak" class="img-fluid">
 							</a>
 						</li>
 					</ul>
