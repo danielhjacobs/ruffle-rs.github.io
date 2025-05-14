@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Script from "next/script";
 import classes from "../app/index.module.css";
+import { useTranslation } from "next-export-i18n";
 
 declare global {
   interface Window {
@@ -28,6 +29,7 @@ interface LogoProps {
 }
 
 export default function InteractiveLogo({ className }: LogoProps) {
+  const { t } = useTranslation();
   const container = useRef<HTMLDivElement>(null);
   const [player, setPlayer] = useState<RufflePlayer | null>(null);
 
@@ -80,8 +82,9 @@ export default function InteractiveLogo({ className }: LogoProps) {
       />
       <div ref={container} className={className}>
         <Image
+          suppressHydrationWarning
           src="/logo.svg"
-          alt="Ruffle Logo"
+          alt={t("logo.alt-tag")}
           className={player ? classes.hidden : classes.staticLogo}
           width="340"
           height="110"
